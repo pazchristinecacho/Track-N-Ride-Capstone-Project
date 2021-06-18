@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "488803270714",
+    "project_id": "track-n-ride",
+    "storage_bucket": "track-n-ride.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:488803270714:android:ef99e0cfbb43c093a73503",
+        "android_client_info": {
+          "package_name": "com.tnr.tnrapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "488803270714-hm3lvhm8e7f1bo8vtq9g5k84lnaqr54v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyADT-U40c_5b1mTmdSCVqCoGuJv8IY9OWY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "488803270714-hm3lvhm8e7f1bo8vtq9g5k84lnaqr54v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
