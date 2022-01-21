@@ -11,6 +11,7 @@ import 'package:tnrapp/AllScreens/home.dart';
 import 'package:tnrapp/AllScreens/login.dart';
 import 'package:tnrapp/AllScreens/loginScreenDriver.dart';
 import 'package:tnrapp/AllScreens/mainscreen.dart';
+import 'package:tnrapp/AllScreens/phoneSignIn.dart';
 import 'package:tnrapp/AllScreens/registration.dart';
 import 'package:tnrapp/AllScreens/registrationDriver.dart';
 import 'package:tnrapp/AllScreens/registrationFormDriver.dart';
@@ -18,7 +19,6 @@ import 'package:tnrapp/AllScreens/verificationScreen.dart';
 import 'package:tnrapp/AllScreens/verificationScreenDriver.dart';
 import 'package:tnrapp/CommuterScreen/HomeCommuterScreen.dart';
 import 'package:tnrapp/DataHandler/appData.dart';
-import 'package:tnrapp/DriverScreen/HomeDriverScreen.dart';
 import 'package:tnrapp/DriverScreen/mainscreenDriver.dart';
 
 void main() async {
@@ -27,11 +27,18 @@ void main() async {
   runApp(MyApp());
 }
 
-DatabaseReference usersRef = FirebaseDatabase.instance.reference().child("users");
-DatabaseReference userDriversRef = FirebaseDatabase.instance.reference().child("userDrivers");
+DatabaseReference usersRef =
+    FirebaseDatabase.instance.reference().child("users");
+/*DatabaseReference userDriversRef =
+    FirebaseDatabase.instance.reference().child("
+    ");*/
+DatabaseReference driversRef =
+    FirebaseDatabase.instance.reference().child("drivers");
+DatabaseReference rideRequestRef =
+    FirebaseDatabase.instance.reference().child("Ride Requests");
 
 class MyApp extends StatelessWidget {
-  static  const String idScreen = "main";
+  static const String idScreen = "main";
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -46,8 +53,10 @@ class MyApp extends StatelessWidget {
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
         //home: login(),
-        initialRoute: Home.idScreen,
-        //initialRoute: FirebaseAuth.instance.currentUser == null ? Home.idScreen : MainScreen.idScreen,
+        //initialRoute: Home.idScreen,
+        initialRoute: FirebaseAuth.instance.currentUser == null
+            ? Home.idScreen
+            : MainScreen.idScreen,
         routes: {
           VerificationScreen.idScreen: (context) => VerificationScreen(),
           VerificationDriver.idScreen: (context) => VerificationDriver(),
@@ -55,7 +64,8 @@ class MyApp extends StatelessWidget {
           LoginScreenDriver.idScreen: (context) => LoginScreenDriver(),
           RegistrationScreen.idScreen: (context) => RegistrationScreen(),
           RegisterDriver.idScreen: (context) => RegisterDriver(),
-          RegistrationFormDriver.idScreen: (context) => RegistrationFormDriver(),
+          RegistrationFormDriver.idScreen: (context) =>
+              RegistrationFormDriver(),
           CameraAuthScreen.idScreen: (context) => CameraAuthScreen(),
           CameraAuthNext.idScreen: (context) => CameraAuthNext(),
           CameraAuthPicScreen.idScreen: (context) => CameraAuthPicScreen(),
@@ -64,6 +74,7 @@ class MyApp extends StatelessWidget {
           MainScreen.idScreen: (context) => MainScreen(),
           MainScreenDriver.idScreen: (context) => MainScreenDriver(),
           HomeCommuterScreen.idScreen: (context) => HomeCommuterScreen(),
+          PhoneSignInPage.idScreen: (context) => PhoneSignInPage(),
         },
         debugShowCheckedModeBanner: false,
       ),

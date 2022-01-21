@@ -30,39 +30,36 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   User user;
 
-  
-
   @override
   void initState() {
-    _auth.userChanges().listen((event) => setState(() => user = event));
     super.initState();
-
     AssistantMethods.getCurrentOnlineUserInfo();
+    _auth.userChanges().listen((event) => setState(() => user = event));
   }
 
   @override
   Widget build(BuildContext context) {
-
     File _image;
     final picker = ImagePicker();
 
-  Future getImage() async {
-    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+    Future getImage() async {
+      final pickedFile = await picker.getImage(source: ImageSource.gallery);
 
-    setState(() {
-      if (pickedFile != null) {
-        _image = File(pickedFile.path);
-        print('Image Path $_image');
-      } else {
-        print('No image selected.');
-      }
-    });
-  }
+      setState(() {
+        if (pickedFile != null) {
+          _image = File(pickedFile.path);
+          print('Image Path $_image');
+        } else {
+          print('No image selected.');
+        }
+      });
+    }
+
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           //Navigator.push(context,
-              //MaterialPageRoute(builder: (context) => EditProfile()));
+          //MaterialPageRoute(builder: (context) => EditProfile()));
         },
         child: Container(
           width: 60,
@@ -102,8 +99,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ),
                           */
                           Container(
-                            padding: EdgeInsets.only(
-                                left: 8, right: 8, bottom: 2),
+                            padding:
+                                EdgeInsets.only(left: 8, right: 8, bottom: 2),
                             height: 32,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(30),
@@ -120,14 +117,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   width: 2,
                                 ),
                                 TextButton(
-                                  onPressed: () {
-                                    Navigator.push(context, MaterialPageRoute(builder: (context) => CameraAuthScreen()));
-                                  },
-                                  child: 
-                                    Text("Verify Account", 
-                                      style: TextStyle(fontSize: 14.0,color: Colors.white,fontWeight: FontWeight.bold),)
-                                  ),
-                                
+                                    onPressed: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  CameraAuthScreen()));
+                                    },
+                                    child: Text(
+                                      "Verify Account",
+                                      style: TextStyle(
+                                          fontSize: 14.0,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold),
+                                    )),
                               ],
                             ),
                           )
@@ -136,8 +139,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                   ),
                   Padding(
-                    padding:
-                        const EdgeInsets.only(top: 16,),
+                    padding: const EdgeInsets.only(
+                      top: 16,
+                    ),
                     child: Expanded(
                       flex: 4,
                       child: Container(
@@ -152,16 +156,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           SizedBox(
                             height: 20.0,
                           ),
-                          firebaseUser.displayName != null ? Text('Hi, '+ user.displayName,
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20.0,
-                              )) :
-                          Text('Hi, '+ userCurrentinfo.name,
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20.0,
-                              )),
+                          firebaseUser.displayName != null
+                              ? Text('Hi, ' + user.displayName,
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20.0,
+                                  ))
+                              : Text('Hi, ' + userCurrentInfo.name,
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20.0,
+                                  )),
                           SizedBox(
                             height: 10.0,
                           ),
@@ -175,16 +180,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   backgroundColor: Color(0xff476cfb),
                                   child: ClipOval(
                                     child: new SizedBox(
-                                      width: 65.0,
-                                      height: 65.0,
-                                      child: firebaseUser.photoURL != null ? CircleAvatar(
-                                      backgroundImage: NetworkImage(
-                                        user.photoURL,
-                                      ),
-                                      backgroundColor: Colors.white,
-                                    )
-                                    : Image.asset('images/user_icon.png', height: 65.0, width: 65.0,)
-                                    ),
+                                        width: 65.0,
+                                        height: 65.0,
+                                        child: firebaseUser.photoURL != null
+                                            ? CircleAvatar(
+                                                backgroundImage: NetworkImage(
+                                                  user.photoURL,
+                                                ),
+                                                backgroundColor: Colors.white,
+                                              )
+                                            : Image.asset(
+                                                'images/user_icon.png',
+                                                height: 65.0,
+                                                width: 65.0,
+                                              )),
                                   ),
                                 ),
                               ),
@@ -205,7 +214,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           SizedBox(
                             height: 10.0,
                           ),
-                          
                           Text(
                             'Commuter',
                             style: TextStyle(
@@ -223,7 +231,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(
-                      top: 16, bottom: 16,
+                      top: 16,
+                      bottom: 16,
                     ),
                     child: Expanded(
                       flex: 5,
@@ -310,20 +319,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                       fontSize: 15.0,
                                                     ),
                                                   ),
-                                                  userCurrentinfo.contactNum != null ? Text(
-                                                    userCurrentinfo.contactNum,
-                                                    style: TextStyle(
-                                                      fontSize: 12.0,
-                                                      color: Colors.grey[400],
-                                                    ),
-                                                  ) :
-                                                  Text(
-                                                    "No contact number",
-                                                    style: TextStyle(
-                                                      fontSize: 12.0,
-                                                      color: Colors.grey[400],
-                                                    ),
-                                                  ),
+                                                  user.phoneNumber != null
+                                                      ? Text(
+                                                          user.phoneNumber,
+                                                          style: TextStyle(
+                                                            fontSize: 12.0,
+                                                            color: Colors
+                                                                .grey[400],
+                                                          ),
+                                                        )
+                                                      : Text(
+                                                          "No contact number",
+                                                          style: TextStyle(
+                                                            fontSize: 12.0,
+                                                            color: Colors
+                                                                .grey[400],
+                                                          ),
+                                                        ),
                                                 ],
                                               )
                                             ],
@@ -353,20 +365,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                       fontSize: 15.0,
                                                     ),
                                                   ),
-                                                  firebaseUser.email != null ? Text(
-                                                    user.email,
-                                                    style: TextStyle(
-                                                      fontSize: 12.0,
-                                                      color: Colors.grey[400],
-                                                    ),
-                                                  ) :
-                                                  Text(
-                                                    userCurrentinfo.email,
-                                                    style: TextStyle(
-                                                      fontSize: 12.0,
-                                                      color: Colors.grey[400],
-                                                    ),
-                                                  ),
+                                                  user.email != null
+                                                      ? Text(
+                                                          user.email,
+                                                          style: TextStyle(
+                                                            fontSize: 12.0,
+                                                            color: Colors
+                                                                .grey[400],
+                                                          ),
+                                                        )
+                                                      : Text(
+                                                          userCurrentInfo.email,
+                                                          style: TextStyle(
+                                                            fontSize: 12.0,
+                                                            color: Colors
+                                                                .grey[400],
+                                                          ),
+                                                        ),
                                                 ],
                                               )
                                             ],
@@ -385,6 +400,4 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
     );
   }
-
-
 }

@@ -24,7 +24,8 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   Widget build(BuildContext context) {
-    String placeAddress = Provider.of<AppData>(context).pickUpLocation?.placeName ?? "";
+    String placeAddress =
+        Provider.of<AppData>(context).pickUpLocation?.placeName ?? "";
     pickUpTextEditingController.text = placeAddress;
 
     return Scaffold(
@@ -39,68 +40,78 @@ class _SearchScreenState extends State<SearchScreen> {
                   color: Colors.black,
                   blurRadius: 6.0,
                   spreadRadius: 0.5,
-                  offset: Offset(0.7,0.7),
+                  offset: Offset(0.7, 0.7),
                 ),
               ],
             ),
-
             child: Padding(
               padding: EdgeInsets.fromLTRB(25.0, 30.0, 25.0, 20.0),
               child: Column(
                 children: [
-                  SizedBox(height: 5.0,),
+                  SizedBox(
+                    height: 5.0,
+                  ),
                   Stack(
                     children: [
                       GestureDetector(
-                        onTap:(){
+                        onTap: () {
                           Navigator.pop(context);
                         },
-                        child: Icon(
-                            Icons.arrow_back
-                        ),
+                        child: Icon(Icons.arrow_back),
                       ),
                       Center(
-                        child: Text("Set Your Destination", style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),),
+                        child: Text(
+                          "Set Your Destination",
+                          style: TextStyle(
+                              fontSize: 18.0, fontWeight: FontWeight.bold),
+                        ),
                       ),
                     ],
                   ),
-
-                  SizedBox(height: 8.0,),
+                  SizedBox(
+                    height: 8.0,
+                  ),
                   Row(
                     children: [
                       Icon(Icons.location_pin),
-                      SizedBox(width: 18.0,),
+                      SizedBox(
+                        width: 18.0,
+                      ),
                       Expanded(
                         child: Container(
                           decoration: BoxDecoration(
                             color: Colors.black,
                             borderRadius: BorderRadius.circular(1.0),
                           ),
-                        child: Padding(
-                          padding: EdgeInsets.all(3.0),
-                          child: TextField(
-                            controller: pickUpTextEditingController,
-                            decoration: InputDecoration(
-                              hintText: "Pickup Location",
-                              hintStyle: TextStyle(color: Colors.black),
-                              fillColor: Colors.white,
-                              filled: true,
-                              border: InputBorder.none,
-                              isDense: true,
-                              contentPadding: EdgeInsets.only(left: 11.0, top: 8.0, bottom: 8.0),
+                          child: Padding(
+                            padding: EdgeInsets.all(3.0),
+                            child: TextField(
+                              controller: pickUpTextEditingController,
+                              decoration: InputDecoration(
+                                hintText: "Pickup Location",
+                                hintStyle: TextStyle(color: Colors.black),
+                                fillColor: Colors.white,
+                                filled: true,
+                                border: InputBorder.none,
+                                isDense: true,
+                                contentPadding: EdgeInsets.only(
+                                    left: 11.0, top: 8.0, bottom: 8.0),
+                              ),
                             ),
                           ),
-                        ),
                         ),
                       ),
                     ],
                   ),
-
-                  SizedBox(height: 10.0,),
+                  SizedBox(
+                    height: 10.0,
+                  ),
                   Row(
                     children: [
                       Icon(Icons.search),
-                      SizedBox(width: 18.0,),
+                      SizedBox(
+                        width: 18.0,
+                      ),
                       Expanded(
                         child: Container(
                           decoration: BoxDecoration(
@@ -110,7 +121,7 @@ class _SearchScreenState extends State<SearchScreen> {
                           child: Padding(
                             padding: EdgeInsets.all(3.0),
                             child: TextField(
-                              onChanged: (val){
+                              onChanged: (val) {
                                 findPlace(val);
                               },
                               style: TextStyle(color: Colors.black),
@@ -122,7 +133,8 @@ class _SearchScreenState extends State<SearchScreen> {
                                 filled: true,
                                 border: InputBorder.none,
                                 isDense: true,
-                                contentPadding: EdgeInsets.only(left: 11.0, top: 8.0, bottom: 8.0),
+                                contentPadding: EdgeInsets.only(
+                                    left: 11.0, top: 8.0, bottom: 8.0),
                               ),
                             ),
                           ),
@@ -130,65 +142,74 @@ class _SearchScreenState extends State<SearchScreen> {
                       ),
                     ],
                   ),
-
                 ],
               ),
             ),
           ),
-          SizedBox(height: 10.0,),
+          SizedBox(
+            height: 10.0,
+          ),
           (placePredictionList.length > 0)
-          ? Padding(
-            padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0,),
-            child: ListView.separated(
-              padding: EdgeInsets.all(0.0),
-              itemBuilder: (context, index){
-                return PredictonTile(placeDescriptions: placePredictionList[index],);
-              }, 
-              separatorBuilder: (BuildContext context, int index) => DividerWidget(), 
-              itemCount: placePredictionList.length,
-              shrinkWrap: true,
-              physics: ClampingScrollPhysics(),
-            ),
-          )
-          : Container(),
+              ? Padding(
+                  padding: EdgeInsets.symmetric(
+                    vertical: 8.0,
+                    horizontal: 16.0,
+                  ),
+                  child: ListView.separated(
+                    padding: EdgeInsets.all(0.0),
+                    itemBuilder: (context, index) {
+                      return PredictonTile(
+                        placeDescriptions: placePredictionList[index],
+                      );
+                    },
+                    separatorBuilder: (BuildContext context, int index) =>
+                        DividerWidget(),
+                    itemCount: placePredictionList.length,
+                    shrinkWrap: true,
+                    physics: ClampingScrollPhysics(),
+                  ),
+                )
+              : Container(),
         ],
       ),
     );
   }
 
-  void findPlace(String placeName) async{
-    if(placeName.length > 1){
-      String autoCompleteUrl = "https://maps.googleapis.com/maps/api/place/autocomplete/json?input=$placeName&key=$mapKey&sessiontoken=1234567890&components=country:ph";
+  void findPlace(String placeName) async {
+    if (placeName.length > 1) {
+      String autoCompleteUrl =
+          "https://maps.googleapis.com/maps/api/place/autocomplete/json?input=$placeName&key=$mapKey&sessiontoken=1234567890&components=country:ph";
 
       var res = await RequestAssistant.getRequest(Uri.parse(autoCompleteUrl));
 
-      if(res == "failed"){
+      if (res == "failed") {
         return;
       }
       //print("Places Predictions Response :: ");
       //print(res);
-      if(res["status"] == "OK"){
+      if (res["status"] == "OK") {
         var predictions = res["predictions"];
 
-        var placesList = (predictions as List).map((e) => PlaceDescriptions.fromJson(e)).toList();
+        var placesList = (predictions as List)
+            .map((e) => PlaceDescriptions.fromJson(e))
+            .toList();
         setState(() {
-                  placePredictionList = placesList;
-          });
+          placePredictionList = placesList;
+        });
       }
     }
   }
 }
 
 class PredictonTile extends StatelessWidget {
-
   final PlaceDescriptions placeDescriptions;
-  PredictonTile({ Key key, this.placeDescriptions}) : super(key: key);
+  PredictonTile({Key key, this.placeDescriptions}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return FlatButton(
       padding: EdgeInsets.all(0.0),
-      onPressed: (){
+      onPressed: () {
         getPlaceAddressDetails(placeDescriptions.place_id, context);
         /*showProgressDialog();
           Future.delayed(Duration(seconds: 4), () {
@@ -198,26 +219,46 @@ class PredictonTile extends StatelessWidget {
       child: Container(
         child: Column(
           children: [
-            SizedBox(width: 10.0,),
+            SizedBox(
+              width: 10.0,
+            ),
             Row(
               children: [
                 Icon(Icons.add_location),
-                SizedBox(width: 14.0,),
+                SizedBox(
+                  width: 14.0,
+                ),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedBox(height: 8.0,),
-                      Text(placeDescriptions.main_text, overflow: TextOverflow.ellipsis, style: TextStyle(fontSize: 16.0),),
-                      SizedBox(height: 8.0,),
-                      Text(placeDescriptions.secondary_text, overflow: TextOverflow.ellipsis, style: TextStyle(fontSize: 12.0, color: Colors.grey),),
-                      SizedBox(height: 8.0,),
+                      SizedBox(
+                        height: 8.0,
+                      ),
+                      Text(
+                        placeDescriptions.main_text,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(fontSize: 16.0),
+                      ),
+                      SizedBox(
+                        height: 8.0,
+                      ),
+                      Text(
+                        placeDescriptions.secondary_text,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(fontSize: 12.0, color: Colors.grey),
+                      ),
+                      SizedBox(
+                        height: 8.0,
+                      ),
                     ],
                   ),
                 )
               ],
             ),
-            SizedBox(width: 14.0,),
+            SizedBox(
+              width: 14.0,
+            ),
           ],
         ),
       ),
@@ -232,29 +273,30 @@ class PredictonTile extends StatelessWidget {
     );
     */
 
-    String placeDetailsUrl = "https://maps.googleapis.com/maps/api/place/details/json?place_id=$placeId&key=$mapKey";
+    String placeDetailsUrl =
+        "https://maps.googleapis.com/maps/api/place/details/json?place_id=$placeId&key=$mapKey";
 
     var res = await RequestAssistant.getRequest(Uri.parse(placeDetailsUrl));
 
     //Navigator.pop(context);
 
-    if(res == "failed"){
+    if (res == "failed") {
       return;
     }
-    if(res["status"] == "OK"){
+    if (res["status"] == "OK") {
       Address address = Address();
       address.placeName = res["result"]["name"];
       address.placeId = placeId;
       address.latitude = res["result"]["geometry"]["location"]["lat"];
       address.longitude = res["result"]["geometry"]["location"]["lng"];
 
-      Provider.of<AppData>(context, listen: false).updateDropOffLocationAddress(address);
+      Provider.of<AppData>(context, listen: false)
+          .updateDropOffLocationAddress(address);
       print("This is your drop off location: ");
       print(address.placeName);
 
       Navigator.pop(context, "obtainDirection");
     }
-    
   }
 }
 

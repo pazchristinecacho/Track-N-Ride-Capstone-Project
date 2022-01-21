@@ -4,21 +4,20 @@ import 'package:tnrapp/AllScreens/verificationScreenDriver.dart';
 import 'clipper.dart';
 
 class Home extends StatefulWidget {
-  static  const String idScreen = "home";
+  static const String idScreen = "home";
 
   @override
   _HomeState createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
-
   @override
   Widget build(BuildContext context) {
-
-        //GO logo widget
+    //GO logo widget
     Widget logo() {
       return Padding(
-        padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.15),
+        padding:
+            EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.15),
         child: Container(
           width: MediaQuery.of(context).size.width,
           height: 180,
@@ -59,7 +58,7 @@ class _HomeState extends State<Home> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      CustomButton(
+                      /*CustomButton(
                         label: "DRIVER",
                         primaryColor: Colors.white,
                         secondaryColor:  Theme.of(context).primaryColor,
@@ -70,18 +69,24 @@ class _HomeState extends State<Home> {
                         onPressed: () { 
                           Navigator.pushNamedAndRemoveUntil(context, VerificationDriver.idScreen, (route) => false);
                         },
+                      ),*/
+
+                      SizedBox(
+                        height: 20,
+                        width: 20,
                       ),
-                      SizedBox(height: 20, width: 20,),
                       CustomButton(
-                        label: "COMMUTER",
-                        primaryColor:  Theme.of(context).primaryColor,
+                        label: "Continue as a Commuter",
+                        primaryColor: Theme.of(context).primaryColor,
                         secondaryColor: Colors.white,
                         icon: Icon(
                           Icons.person,
                           size: 50.0,
-                          color: Colors.white,),
-                        onPressed: () { 
-                          Navigator.pushNamedAndRemoveUntil(context, VerificationScreen.idScreen, (route) => false);
+                          color: Colors.white,
+                        ),
+                        onPressed: () {
+                          Navigator.pushNamedAndRemoveUntil(context,
+                              VerificationScreen.idScreen, (route) => false);
                         },
                       ),
                     ],
@@ -130,7 +135,7 @@ class CustomButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 150,
-      width: MediaQuery.of(context).size.width/2.75,
+      width: MediaQuery.of(context).size.width / 2.75,
       child: RaisedButton(
         highlightElevation: 0.0,
         splashColor: secondaryColor,
@@ -138,11 +143,24 @@ class CustomButton extends StatelessWidget {
         elevation: 0.0,
         color: primaryColor,
         shape: RoundedRectangleBorder(
-            borderRadius: new BorderRadius.circular(15.0), side: BorderSide(color: Colors.white, width: 3)),
-        child: Column( // Replace with a Row for horizontal icon + text
+            borderRadius: new BorderRadius.circular(15.0),
+            side: BorderSide(color: Colors.white, width: 3)),
+        child: Column(
+          // Replace with a Row for horizontal icon + text
           children: <Widget>[
-            Container(padding: EdgeInsets.all(25,), child: icon,),
-            Text(label, style: TextStyle(fontWeight: FontWeight.bold, color: secondaryColor, fontSize: 15),)
+            Container(
+              padding: EdgeInsets.all(
+                25,
+              ),
+              child: icon,
+            ),
+            Text(
+              label,
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: secondaryColor,
+                  fontSize: 15),
+            )
           ],
         ),
         onPressed: onPressed,

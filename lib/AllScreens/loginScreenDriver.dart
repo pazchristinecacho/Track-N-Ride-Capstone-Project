@@ -9,7 +9,7 @@ import 'package:tnrapp/DriverScreen/mainscreenDriver.dart';
 import 'package:tnrapp/main.dart';
 
 class LoginScreenDriver extends StatelessWidget {
-  static  const String idScreen = "loginScreenDriver";
+  static const String idScreen = "loginScreenDriver";
 
   TextEditingController emailTextEditingController = TextEditingController();
 
@@ -28,16 +28,21 @@ class LoginScreenDriver extends StatelessWidget {
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.10,),
+          padding: EdgeInsets.only(
+            top: MediaQuery.of(context).size.height * 0.10,
+          ),
           child: Column(
             children: [
               Positioned(
                 child: Container(
                   alignment: Alignment.topLeft,
-                  padding: EdgeInsets.only(left: 10,),
+                  padding: EdgeInsets.only(
+                    left: 10,
+                  ),
                   child: IconButton(
                     onPressed: () {
-                      Navigator.pushNamedAndRemoveUntil(context, VerificationDriver.idScreen, (route) => false);
+                      Navigator.pushNamedAndRemoveUntil(context,
+                          VerificationDriver.idScreen, (route) => false);
                     },
                     icon: Icon(
                       Icons.arrow_back,
@@ -47,11 +52,12 @@ class LoginScreenDriver extends StatelessWidget {
                   ),
                 ),
               ),
-
               Align(
                 alignment: Alignment.centerLeft,
                 child: Container(
-                  padding: EdgeInsets.only(left: 20,),
+                  padding: EdgeInsets.only(
+                    left: 20,
+                  ),
                   child: Text(
                     "Welcome,",
                     style: TextStyle(
@@ -65,7 +71,9 @@ class LoginScreenDriver extends StatelessWidget {
               ),
               Align(
                 child: Container(
-                  padding: EdgeInsets.only(left: 20,),
+                  padding: EdgeInsets.only(
+                    left: 20,
+                  ),
                   child: Text(
                     "Sign in as a Driver to Continue!",
                     style: TextStyle(
@@ -77,7 +85,6 @@ class LoginScreenDriver extends StatelessWidget {
                   alignment: Alignment.centerLeft,
                 ),
               ),
-
               Padding(
                 padding: EdgeInsets.fromLTRB(
                     20, MediaQuery.of(context).size.height * 0.07, 20, 10),
@@ -133,7 +140,7 @@ class LoginScreenDriver extends StatelessWidget {
                                 ? Icons.visibility
                                 : Icons.visibility_off),
                             onPressed: () {
-                                _isObscure = !_isObscure;
+                              _isObscure = !_isObscure;
                             }),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
@@ -171,12 +178,12 @@ class LoginScreenDriver extends StatelessWidget {
                       ),
                     ),
                     SizedBox(height: 10),
-                      CustomButton(
-                        label: "Log In",
-                        primaryColor: Theme.of(context).primaryColor,
-                        secondaryColor: Colors.white,
-                        onPressed: () {
-                          if (emailTextEditingController.text.isEmpty) {
+                    CustomButton(
+                      label: "Log In",
+                      primaryColor: Theme.of(context).primaryColor,
+                      secondaryColor: Colors.white,
+                      onPressed: () {
+                        if (emailTextEditingController.text.isEmpty) {
                           displayToastMessage(
                               "Email address is empty.", context);
                         } else if (!emailTextEditingController.text
@@ -189,44 +196,55 @@ class LoginScreenDriver extends StatelessWidget {
                           loginAndAuthenticateUser(context);
                         }
                       },
-                      ),
-                    
+                    ),
                     SizedBox(height: 45),
-                    Padding(padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.10,),),
+                    Padding(
+                      padding: EdgeInsets.only(
+                        top: MediaQuery.of(context).size.height * 0.10,
+                      ),
+                    ),
                   ],
                 ),
               ),
-
               DecoratedBox(
-                decoration: BoxDecoration(color: Theme.of(context).primaryColor, borderRadius: BorderRadius.only(topLeft: Radius.circular(200.0), topRight: Radius.circular(200.0))),
+                decoration: BoxDecoration(
+                    color: Theme.of(context).primaryColor,
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(200.0),
+                        topRight: Radius.circular(200.0))),
                 child: Container(
                   padding: EdgeInsets.only(top: 10, left: 0, right: 0),
                   child: Row(
-                      children: <Widget>[
-                        Text('Do not have an Account?',
-                            style: TextStyle(fontSize: 15,color: Colors.white)),
-                        FlatButton(
-                          textColor: Colors.white,
-                          child: Text(
-                            'Register Here',
-                            style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold,),
+                    children: <Widget>[
+                      Text('Do not have an Account?',
+                          style: TextStyle(fontSize: 15, color: Colors.white)),
+                      FlatButton(
+                        textColor: Colors.white,
+                        child: Text(
+                          'Register Here',
+                          style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
                           ),
-                          onPressed: () {
-                            Navigator.pushNamedAndRemoveUntil(context, RegisterDriver.idScreen, (route) => false);
-                          },
-                        )
-                      ],
-                      mainAxisAlignment: MainAxisAlignment.center,
-                    ),
+                        ),
+                        onPressed: () {
+                          Navigator.pushNamedAndRemoveUntil(context,
+                              RegisterDriver.idScreen, (route) => false);
+                        },
+                      )
+                    ],
+                    mainAxisAlignment: MainAxisAlignment.center,
+                  ),
                   alignment: Alignment.bottomCenter,
                 ),
-                ),
-
-            ],)
-          ,),
+              ),
+            ],
+          ),
         ),
+      ),
     );
   }
+
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
   void loginAndAuthenticateUser(BuildContext context) async {
@@ -240,7 +258,7 @@ class LoginScreenDriver extends StatelessWidget {
         .user;
 
     if (firebaseUser != null) {
-      userDriversRef.child(firebaseUser.uid).once().then((DataSnapshot snap) {
+      driversRef.child(firebaseUser.uid).once().then((DataSnapshot snap) {
         if (snap.value != null) {
           //Navigator.pushNamedAndRemoveUntil(context, MainScreen.idScreen, (route) => false);
 
@@ -258,13 +276,11 @@ class LoginScreenDriver extends StatelessWidget {
       displayToastMessage("Error occured, can not sign in.", context);
     }
   }
-
 }
 
 displayToastMessage(String message, BuildContext context) {
   Fluttertoast.showToast(msg: message);
 }
-
 
 class CustomButton extends StatelessWidget {
   final Color primaryColor;
@@ -292,10 +308,12 @@ class CustomButton extends StatelessWidget {
         elevation: 0.0,
         color: primaryColor,
         shape: RoundedRectangleBorder(
-            borderRadius: new BorderRadius.circular(15.0), side: BorderSide(color: Colors.white, width: 3)),
+            borderRadius: new BorderRadius.circular(15.0),
+            side: BorderSide(color: Colors.white, width: 3)),
         child: Text(
           label,
-          style: TextStyle(fontWeight: FontWeight.bold, color: secondaryColor, fontSize: 20),
+          style: TextStyle(
+              fontWeight: FontWeight.bold, color: secondaryColor, fontSize: 20),
         ),
         onPressed: onPressed,
       ),

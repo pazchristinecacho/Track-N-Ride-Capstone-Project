@@ -5,6 +5,7 @@ import 'package:flutter_signin_button/button_view.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:tnrapp/AllScreens/home.dart';
 import 'package:tnrapp/AllScreens/login.dart';
+import 'package:tnrapp/AllScreens/phoneSignIn.dart';
 import 'package:tnrapp/AllScreens/registration.dart';
 import 'clipper.dart';
 import 'mainscreen.dart';
@@ -31,7 +32,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
             EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.10),
         child: Container(
           width: MediaQuery.of(context).size.width,
-          height: 160,
+          height: 100,
           child: Stack(
             children: <Widget>[
               Positioned(
@@ -55,16 +56,14 @@ class _VerificationScreenState extends State<VerificationScreen> {
               ),
               Positioned(
                 child: Container(
-                    height: 154,
+                    height: 104,
                     child: Align(
-                      child: Text(
-                        "TRACK \nN\' RIDE",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 60,
-                          fontWeight: FontWeight.bold,
-                          color: Theme.of(context).primaryColor,
-                        ),
+                      child: /**/
+                          Image(
+                        image: AssetImage("images/tnrlogo.png"),
+                        width: 390.0,
+                        height: 250.0,
+                        alignment: Alignment.center,
                       ),
                     )),
               ),
@@ -142,6 +141,19 @@ class _VerificationScreenState extends State<VerificationScreen> {
                          }); */
                     },
                   ),
+                  /*
+                  OutlineButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => PhoneSignInPage()),
+                      );
+                    },
+                    color: Theme.of(context).primaryColor,
+                    textColor: Colors.blueAccent,
+                    child: Text("Sign In with SMS\u2192"),
+                  ),*/
                 ],
               ),
               padding: EdgeInsets.only(top: 80, left: 35, right: 35),

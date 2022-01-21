@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:tnrapp/AllScreens/CameraAuthPic.dart';
-import 'package:tnrapp/AllScreens/mainscreen-copy.dart';
 import 'package:tnrapp/DriverScreen/HomeDriverScreen.dart';
 import 'package:tnrapp/DriverScreen/mainscreenDriver.dart';
 
 class CameraAuthFinished extends StatefulWidget {
-
-  static  const String idScreen = "cameraAuthFin";
+  static const String idScreen = "cameraAuthFin";
   @override
   _CameraAuthFinishedState createState() => _CameraAuthFinishedState();
 }
@@ -14,11 +12,11 @@ class CameraAuthFinished extends StatefulWidget {
 class _CameraAuthFinishedState extends State<CameraAuthFinished> {
   @override
   Widget build(BuildContext context) {
-
 //GO logo widget
     Widget logo() {
       return Padding(
-        padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.15),
+        padding:
+            EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.15),
         child: Container(
           width: MediaQuery.of(context).size.width,
           height: 220,
@@ -27,10 +25,13 @@ class _CameraAuthFinishedState extends State<CameraAuthFinished> {
               Positioned(
                 child: Container(
                   alignment: Alignment.topLeft,
-                  padding: EdgeInsets.only(left: 10,),
+                  padding: EdgeInsets.only(
+                    left: 10,
+                  ),
                   child: IconButton(
                     onPressed: () {
-                      Navigator.pushNamedAndRemoveUntil(context, CameraAuthPicScreen.idScreen, (route) => false);
+                      Navigator.pushNamedAndRemoveUntil(context,
+                          CameraAuthPicScreen.idScreen, (route) => false);
                     },
                     icon: Icon(
                       Icons.arrow_back,
@@ -42,10 +43,13 @@ class _CameraAuthFinishedState extends State<CameraAuthFinished> {
               ),
               Positioned(
                 child: Container(
-                  padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.15, left: 50,),
-                    height: 400,
-                    child: Column(
-                      children: [
+                  padding: EdgeInsets.only(
+                    top: MediaQuery.of(context).size.height * 0.15,
+                    left: 50,
+                  ),
+                  height: 400,
+                  child: Column(
+                    children: [
                       Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
@@ -76,9 +80,8 @@ class _CameraAuthFinishedState extends State<CameraAuthFinished> {
                         ),
                       ),
                     ],
-                    ),
-                    
-                    ),
+                  ),
+                ),
               ),
             ],
           ),
@@ -92,28 +95,30 @@ class _CameraAuthFinishedState extends State<CameraAuthFinished> {
       body: Builder(builder: (context) {
         return SingleChildScrollView(
           child: Column(
-          children: <Widget>[
-            logo(),
-            Padding(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  SizedBox(height: 100),
-                  CustomButton(
-                    label: "Exit",
-                    primaryColor:  Theme.of(context).primaryColor,
-                    secondaryColor: Colors.white,
-                    onPressed: () {
-                      Navigator.pushNamedAndRemoveUntil(context, MainScreenDriver.idScreen, (route) => false);
-                    },
-                  ),
-                ],
+            children: <Widget>[
+              logo(),
+              Padding(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    SizedBox(height: 100),
+                    CustomButton(
+                      label: "Exit",
+                      primaryColor: Theme.of(context).primaryColor,
+                      secondaryColor: Colors.white,
+                      onPressed: () {
+                        Navigator.pushNamedAndRemoveUntil(context,
+                            MainScreenDriver.idScreen, (route) => false);
+                      },
+                    ),
+                  ],
+                ),
+                padding: EdgeInsets.only(top: 40, left: 35, right: 35),
               ),
-              padding: EdgeInsets.only(top: 40, left: 35, right: 35),
-            ),
-          ],
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-        ),);
+            ],
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+          ),
+        );
       }),
     );
   }
@@ -145,10 +150,12 @@ class CustomButton extends StatelessWidget {
         elevation: 0.0,
         color: primaryColor,
         shape: RoundedRectangleBorder(
-            borderRadius: new BorderRadius.circular(15.0), side: BorderSide(color: Theme.of(context).primaryColor, width: 3)),
+            borderRadius: new BorderRadius.circular(15.0),
+            side: BorderSide(color: Theme.of(context).primaryColor, width: 3)),
         child: Text(
           label,
-          style: TextStyle(fontWeight: FontWeight.bold, color: secondaryColor, fontSize: 20),
+          style: TextStyle(
+              fontWeight: FontWeight.bold, color: secondaryColor, fontSize: 20),
         ),
         onPressed: onPressed,
       ),

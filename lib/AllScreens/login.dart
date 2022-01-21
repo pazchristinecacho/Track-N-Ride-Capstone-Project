@@ -5,9 +5,11 @@ import 'package:flutter_signin_button/button_list.dart';
 import 'package:flutter_signin_button/button_view.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:tnrapp/AllScreens/mainscreen.dart';
+import 'package:tnrapp/AllScreens/phoneSignIn.dart';
 import 'package:tnrapp/AllScreens/registration.dart';
 import 'package:tnrapp/AllScreens/verificationScreen.dart';
 import 'package:tnrapp/CommuterScreen/HomeCommuterScreen.dart';
+import 'package:tnrapp/configMaps.dart';
 import 'package:tnrapp/main.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -169,6 +171,28 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       style: TextStyle(fontSize: 20.0),
                     ),
+                    /*Align(
+                      child: Container(
+                        padding: EdgeInsets.only(top: 0),
+                        child: FlatButton(
+                          onPressed: () {
+                            Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                    builder: (context) => PhoneSignInPage()));
+                          },
+                          child: Text(
+                            "Log In with SMS",
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.blueAccent,
+                            ),
+                            textAlign: TextAlign.left,
+                          ),
+                        ),
+                        alignment: Alignment.centerLeft,
+                      ),
+                    ),*/
                     Align(
                       child: Container(
                         padding: EdgeInsets.only(top: 0),
@@ -245,6 +269,7 @@ class _LoginScreenState extends State<LoginScreen> {
                          }); */
                       },
                     ),
+                    // Button to go to Phone sign in
                     Padding(
                       padding: EdgeInsets.only(
                         top: MediaQuery.of(context).size.height * 0.08,
@@ -300,6 +325,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 email: emailTextEditingController.text,
                 password: passwordTextEditingController.text)
             .catchError((errMsg) {
+      Navigator.pop(context);
       displayToastMessage("Error: " + errMsg.toString(), context);
     }))
         .user;
@@ -308,11 +334,12 @@ class _LoginScreenState extends State<LoginScreen> {
       usersRef.child(firebaseUser.uid).once().then((DataSnapshot snap) {
         if (snap.value != null) {
           //Navigator.pushNamedAndRemoveUntil(context, MainScreen.idScreen, (route) => false);
-
+          currentfirebaseUser = firebaseUser;
           Navigator.of(context).pushReplacement(
               MaterialPageRoute(builder: (context) => MainScreen()));
           displayToastMessage("You are now logged in.", context);
         } else {
+          Navigator.pop(context);
           _firebaseAuth.signOut();
           displayToastMessage(
               "No record exists for this user. Please create new account.",
